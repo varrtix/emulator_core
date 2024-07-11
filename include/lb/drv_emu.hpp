@@ -65,18 +65,18 @@ template <typename T> struct drv_emulator {
   using raw_type = std::remove_cv_t<std::remove_pointer_t<T>>;
   using func_type = std::function<int(const char *, T)>;
   enum class value_type : char {
-    int_v = 'I',
-    double_v = 'F',
-    string_v = 'S',
+    int_val = 'I',
+    double_val = 'F',
+    string_val = 'S',
   };
 
   static constexpr auto prefix = "#_.";
   constexpr auto to_io_prefix() const noexcept {
-    auto t = value_type::string_v;
+    auto t = value_type::string_val;
     if constexpr (std::is_same_v<int, raw_type>)
-      t = value_type::int_v;
+      t = value_type::int_val;
     else if constexpr (std::is_same_v<double, raw_type>)
-      t = value_type::double_v;
+      t = value_type::double_val;
     return std::string(prefix) + static_cast<char>(t);
   }
   constexpr auto to_io_name(const char *param) const noexcept {
