@@ -116,7 +116,7 @@ template <typename T> struct drv_emulator {
     if (ret == IO_SUCCESS)
       return DRV_SUCCESS;
 
-    ctf::CTF_PRINT(ctf::CL_INFO, "%sfailed to %s, error code : %d\n",
+    ctf::CTF_PRINT(ctf::CL_ERROR, "%sfailed to %s, error code : %d\n",
                    mprefix.c_str(), func, ret);
 
     return DRV_ERROR;
