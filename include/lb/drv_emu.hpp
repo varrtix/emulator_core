@@ -70,14 +70,14 @@ template <typename T> struct drv_emulator {
     string_val = 'S',
   };
 
-  static constexpr auto prefix = "#_.";
+  static constexpr auto prefix = "#_EMU.";
   constexpr auto to_io_prefix() const noexcept {
     auto t = value_type::string_val;
     if constexpr (std::is_same_v<int, raw_type>)
       t = value_type::int_val;
     else if constexpr (std::is_same_v<double, raw_type>)
       t = value_type::double_val;
-    return std::string(prefix) + static_cast<char>(t);
+    return std::string(prefix) + static_cast<char>(t) + ".";
   }
   constexpr auto to_io_name(const char *param) const noexcept {
     return to_io_prefix() + param;
