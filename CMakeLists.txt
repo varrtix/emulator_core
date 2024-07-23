@@ -91,6 +91,9 @@ foreach(drvname IN LISTS EMU_DRV_LIST)
     target_link_libraries(${drvname} PRIVATE ${CTF_LIBRARIES})
 
     target_compile_definitions(${drvname} PRIVATE CONFIG_H=\"${PROJECT_BINARY_DIR}/include/${drvname}_config.h\")
+    if(CMAKE_SYSTEM_NAME STREQUAL "Windows" OR CMAKE_SYSTEM_NAME STREQUAL "MSYS")
+        set_target_properties(${drvname} PROPERTIES OUTPUT_NAME "lib${drvname}")
+    endif()
 
     install(TARGETS ${drvname}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
