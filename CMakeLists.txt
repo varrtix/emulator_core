@@ -8,7 +8,8 @@ include(${CMAKE_CURRENT_LIST_DIR}/cmake/emu.cmake)
 include(${DRV_EMU_DIR}/cmake/ctf.cmake)
 
 set_stdcxx()
-set(EMU_DRVS
+
+set(DEFAULT_EMU_DRVS
     dtm
     EtherCat
     koganei
@@ -17,6 +18,11 @@ set(EMU_DRVS
     SFC8000
     TEC
 )
+if(DEFINED EMU_DRVS)
+    string(REPLACE "," ";" EMU_DRV_LIST "${EMU_DRVS}")
+else()
+    set(EMU_DRV_LIST ${DEFAULT_EMU_DRVS})
+endif()
 
 set(CTF_LIBRARIES 
     iosvc
@@ -69,7 +75,7 @@ endif()
 
 set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 file(GLOB SRC_FILES ${SRC_DIR}/*.cc)
-foreach(drvname IN LISTS EMU_DRVS)
+foreach(drvname IN LISTS EMU_DRV_LIST)
     set(CONFIG_H_CONTENT "// Auto-generated config.h for ${drvname}\n")
     set(CONFIG_H_CONTENT "${CONFIG_H_CONTENT}#define EMU_DRV_NAME \"${drvname}\"\n")
     file(WRITE "${PROJECT_BINARY_DIR}/include/${drvname}_config.h" "${CONFIG_H_CONTENT}")
