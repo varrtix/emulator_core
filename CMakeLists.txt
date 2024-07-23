@@ -80,7 +80,7 @@ foreach(drvname IN LISTS EMU_DRV_LIST)
     set(CONFIG_H_CONTENT "${CONFIG_H_CONTENT}#define EMU_DRV_NAME \"${drvname}\"\n")
     file(WRITE "${PROJECT_BINARY_DIR}/include/${drvname}_config.h" "${CONFIG_H_CONTENT}")
 
-    add_library(${drvname} ${SRC_FILES})
+    add_library(${drvname} SHARED ${SRC_FILES})
     target_include_directories(${drvname} PRIVATE 
         ${SRC_DIR}/internal
         ${PROJECT_BINARY_DIR}/include
@@ -93,6 +93,7 @@ foreach(drvname IN LISTS EMU_DRV_LIST)
     target_compile_definitions(${drvname} PRIVATE CONFIG_H=\"${PROJECT_BINARY_DIR}/include/${drvname}_config.h\")
 
     install(TARGETS ${drvname}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     )
