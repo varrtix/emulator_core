@@ -17,6 +17,7 @@ set(DEFAULT_EMU_DRVS
     plc
     SFC8000
     TEC
+    DrvRobot
 )
 if(DEFINED EMU_DRVS)
     string(REPLACE "," ";" EMU_DRV_LIST "${EMU_DRVS}")

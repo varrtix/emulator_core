@@ -8,7 +8,7 @@ CMAKE ?= cmake
 JOBS := $(shell nproc 2>/dev/null || echo 2)
 CMAKE_BUILD_TYPE ?= RelWithDebInfo
 CMAKE_INSTALL_PREFIX ?= $(CURDIR)/dist
-EMU_DRVS ?= dtm,EtherCat,koganei,lebo_gpio,plc,SFC8000,TEC
+EMU_DRVS ?= dtm,EtherCat,koganei,lebo_gpio,plc,SFC8000,TEC,DrvRobot
 CTF_RPATH ?=
 
 ifndef CTF_RPATH
