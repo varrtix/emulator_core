@@ -111,8 +111,8 @@ template <typename T> struct drv_emulator {
 
     ctf::CTF_PRINT(ctf::CL_INFO, "%s\n", mss.c_str());
 
-    auto io_name = to_io_name(param).c_str();
-    ret = fn(io_name, std::forward<T>(val));
+    auto io_name = to_io_name(param);
+    ret = fn(io_name.c_str(), std::forward<T>(val));
     if (ret == IO_SUCCESS)
       return DRV_SUCCESS;
 
